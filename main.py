@@ -23,7 +23,7 @@ def main(config: DictConfig):
 
     val_split = len(val) / len(train)
     train_sessions = config.simulation.n_sessions
-    val_sessions = min(1, int(train_sessions * val_split))
+    val_sessions = max(1, int(train_sessions * val_split))
     print(f"Simulating {train_sessions} train sessions")
     print(f"Simulating {val_sessions} val sessions ({val_split:.4f}%) of train")
 
