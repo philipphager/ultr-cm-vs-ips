@@ -1,7 +1,10 @@
 simulator:
   _target_: src.simulation.Simulator
   baseline_model: ???
-  user_model: ???
+  user_model:
+    _target_: ???
+    position_bias: 1.0
+    noise: 0.1
 
-n_clicks: 1_000_000
+n_sessions: 100
 aggregate_clicks: True

@@ -30,13 +30,12 @@ class ClickDataset(Dataset):
     def __getitem__(self, i: int):
         query_id = self.query_ids[i]
 
-        q = self.q[query_id]
         n = self.n[query_id]
         x = self.x[query_id]
         y = self.y[query_id]
         y_click = self.y_clicks[i].float()
 
-        return q, n, x, y, y_click
+        return x, y, y_click, n
 
 
 class Simulator:
@@ -44,7 +43,9 @@ class Simulator:
         self.baseline_model = baseline_model
         self.user_model = user_model
 
-    def __call__(self, dataset: RatingDataset, n_clicks: int, aggregate: bool = False):
+    def __call__(
+        self, dataset: RatingDataset, n_sessions: int, aggregate: bool = False
+    ):
         dataset = self.rank(dataset)
 
         q, n, x, y = dataset[:]
@@ -55,11 +56,11 @@ class Simulator:
         query_ids = []
         y_clicks = []
 
-        print(f"Generating {n_clicks} per query, aggregating CTRs: {aggregate}")
+        print(f"Generating {n_sessions} per query, aggregating CTRs: {aggregate}")
 
-        for i in tqdm(range(n_queries), f"Generating {n_clicks} clicks per query"):
+        for i in tqdm(range(n_queries), f"Generating {n_sessions} sessions per query"):
             # Sample all clicks for a given query
-            query_probabilities = probabilities[i].repeat(n_clicks, 1)
+            query_probabilities = probabilities[i].repeat(n_sessions, 1)
             clicks = torch.bernoulli(query_probabilities)
 
             if aggregate:
@@ -68,7 +69,7 @@ class Simulator:
             else:
                 # Convert to boolean mask
                 clicks = clicks == 1
-                query_id = torch.full((n_clicks,), i)
+                query_id = torch.full((n_sessions,), i)
 
             query_ids.append(query_id)
             y_clicks.append(clicks)

@@ -2,4 +2,5 @@ defaults:
   - base
 
 simulator:
-  user_model: src.simulation.GradedPBM
+  user_model:
+    _target_: src.simulation.GradedPBM

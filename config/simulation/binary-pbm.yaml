@@ -2,4 +2,5 @@ defaults:
   - base
 
 simulator:
-  user_model: src.simulation.BinaryPBM
+  user_model:
+    _target_: src.simulation.BinaryPBM
