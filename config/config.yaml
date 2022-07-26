@@ -1,0 +1,16 @@
+defaults:
+  - _self_
+  - data: istella
+
+experiment:
+  name: default
+
+hydra:
+  job:
+    chdir: True
+  output_subdir: .
+  run:
+    dir: results/${experiment.name}
+  sweep:
+    dir: results/${experiment.name}
+    subdir: ${hydra.job.override_dirname}

@@ -1,0 +1,12 @@
+# System & IDE
+.idea
+.DS_Store
+
+# Python Files
+*.pyc
+.ipynb_checkpoints
+
+# Project
+outputs
+lightning_logs
+results

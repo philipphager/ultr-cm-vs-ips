@@ -1,0 +1,7 @@
+defaults:
+  - base
+
+_target_: src.data.MSLR10K
+name: MSLR-Web10K
+fold: 1
+n_features: 136

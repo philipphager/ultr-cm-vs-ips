@@ -1,0 +1,13 @@
+defaults:
+  - base
+
+_target_: ultr_evaluation_tips.model.LightGBMRanker
+name: LightGBM
+objective: lambdarank
+boosting_type: gbdt # LambdaMART = LambdaRank + Gradient Boosted Decision Trees
+metric: ndcg
+n_estimators: 500
+n_leaves: 500
+learning_rate: 0.1
+early_stopping_patience: 10
+random_state: 0

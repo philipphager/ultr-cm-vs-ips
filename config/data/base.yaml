@@ -1,0 +1,10 @@
+_target_: ???
+name: ???
+fold: ???
+n_features: ???
+
+pipeline:
+  _target_: src.data.preprocessing.Pipeline
+  normalize: []
+  truncate: []
+  filter: []

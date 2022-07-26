@@ -1,0 +1,23 @@
+name: ultr-evaluation-tips
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch=1.7.1
+  - torchvision=0.8.2
+  - gcc=12.1.0
+  - pip=21.2.4
+  - pip:
+      - hydra-core==1.2.0
+      - hydra_submitit_launcher==1.2.0
+      - pytorch_lightning==1.6.5
+      - pytorchltr==0.2.1
+      - pandas==1.4.1
+      - numpy==1.21.5
+      - scikit-learn==1.0.2
+      - pyarrow==4.0.1
+      - altair==4.1.0
+      - lightgbm==3.3.2
+      - wget==3.2
+      - pre_commit==2.19

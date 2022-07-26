@@ -1,0 +1,14 @@
+defaults:
+  - base
+
+_target_: src.data.Istella
+name: Istella-S
+fold: 1
+n_features: 220
+
+pipeline:
+  normalize:
+    -
+      _target_: src.data.preprocessing.ClipNormalize
+      max_value: 1e9
+    - _target_: src.data.preprocessing.Log1pNormalize

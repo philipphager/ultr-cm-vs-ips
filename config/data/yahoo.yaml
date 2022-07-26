@@ -1,0 +1,7 @@
+defaults:
+  - base
+
+_target_: src.data.Yahoo
+name: Yahoo
+fold: 1
+n_features: 699
