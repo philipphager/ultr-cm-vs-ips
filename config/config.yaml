@@ -1,6 +1,6 @@
 defaults:
   - _self_
-  - data: yahoo
+  - data: mslr10k
   - baseline: lgbm
   - simulation: graded-pbm
   - model: cm
@@ -12,6 +12,7 @@ trainer:
   _target_: pytorch_lightning.Trainer
   max_epochs: 100
   accelerator: auto
+  val_check_interval: 10_000 # Evaluate every 500k clicks
   callbacks:
     -
      _target_: pytorch_lightning.callbacks.EarlyStopping
