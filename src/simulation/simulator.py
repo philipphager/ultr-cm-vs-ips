@@ -57,11 +57,16 @@ class Simulator:
         query_ids = []
         y_clicks = []
 
-        print(f"Generating {n_sessions} per query, aggregating CTRs: {aggregate}")
+        print(f"Generating {n_sessions}, aggregating CTRs: {aggregate}")
+        sessions_per_query = torch.randint(n_queries, (n_sessions,))
+        sessions_per_query = torch.bincount(sessions_per_query, minlength=n_queries)
 
-        for i in tqdm(range(n_queries), f"Generating {n_sessions} sessions per query"):
+        for i in tqdm(range(n_queries), f"Generating {n_sessions} sessions"):
+            if sessions_per_query[i] == 0:
+                continue
+
             # Sample all clicks for a given query
-            query_probabilities = probabilities[i].repeat(n_sessions, 1)
+            query_probabilities = probabilities[i].repeat(sessions_per_query[i], 1)
             clicks = torch.bernoulli(query_probabilities)
 
             if aggregate:
