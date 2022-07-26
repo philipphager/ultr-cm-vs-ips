@@ -1,4 +1,4 @@
-name: ultr-evaluation-tips
+name: ultr-cm-vs-ips
 channels:
   - conda-forge
   - defaults
