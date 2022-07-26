@@ -49,10 +49,6 @@ class IPS(LightningModule):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.relevance(x).squeeze()
 
-    def predict_step(self, batch, idx, **kwargs):
-        q, n, x, y = batch  # RatingDataset
-        return self.relevance(x).squeeze()
-
     def training_step(self, batch, idx):
         q, n, x, y, y_click = batch  # ClickDataset
         _, n_results = y.shape
@@ -69,20 +65,18 @@ class IPS(LightningModule):
 
         y_predict = self.forward(x)
         loss = self.loss(y_predict, y_click, n, self.position_bias)
-        metrics = get_metrics(torch.sigmoid(y_predict), y, n, "val_")
+        metrics = get_metrics(y_predict, y, n, "val_")
 
         self.log("val_loss", loss)
         self.log_dict(metrics)
         return loss
 
     def test_step(self, batch, idx):
-        q, n, x, y, y_click = batch  # ClickDataset
+        q, n, x, y = batch  # RatingDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)
-        loss = self.loss(y_predict, y_click, n, self.position_bias)
-        metrics = get_metrics(torch.sigmoid(y_predict), y, n, "test_")
+        metrics = get_metrics(y_predict, y, n, "test_")
 
-        self.log("test_loss", loss)
         self.log_dict(metrics)
         return metrics

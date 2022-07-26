@@ -12,9 +12,11 @@ random_state: 0
 
 trainer:
   _target_: pytorch_lightning.Trainer
-  max_epochs: 100
+  max_epochs: 1
   accelerator: auto
   val_check_interval: 10_000 # Evaluate every 500k clicks
+  logger:
+    - _target_: src.logger.LocalLogger
   callbacks:
     -
      _target_: pytorch_lightning.callbacks.EarlyStopping

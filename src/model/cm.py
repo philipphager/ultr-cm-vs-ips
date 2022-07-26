@@ -64,10 +64,6 @@ class NeuralPBM(LightningModule):
 
         return y_predict.squeeze(), relevance.squeeze()
 
-    def predict_step(self, batch, idx, **kwargs):
-        q, n, x, y = batch  # RatingDataset
-        return self.relevance(x).squeeze()
-
     def training_step(self, batch, idx):
         q, n, x, y, y_click = batch  # ClickDataset
 
@@ -89,12 +85,10 @@ class NeuralPBM(LightningModule):
         return loss
 
     def test_step(self, batch, idx):
-        q, n, x, y, y_click = batch  # ClickDataset
+        q, n, x, y = batch  # RatingDataset
 
         y_predict_click, y_predict = self.forward(x)
-        loss = self.loss(y_predict_click, y_click, n)
         metrics = get_metrics(y_predict, y, n, "test_")
 
-        self.log("test_loss", loss)
         self.log_dict(metrics)
         return metrics
