@@ -1,4 +1,3 @@
-import torch
 import os
 
 import hydra
@@ -7,7 +6,6 @@ from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning import seed_everything
 
 from src.data.preprocessing.util import random_split
-from src.metric import get_metrics
 
 
 @hydra.main(config_path="config", config_name="config", version_base="1.2")
