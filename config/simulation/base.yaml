@@ -1,0 +1,7 @@
+simulator:
+  _target_: src.simulation.Simulator
+  baseline_model: ???
+  user_model: ???
+
+n_clicks: 1_000_000
+aggregate_clicks: True

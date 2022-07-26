@@ -1,7 +1,8 @@
 defaults:
   - _self_
-  - data: istella
+  - data: mslr30k
   - baseline: lgbm
+  - simulation: graded-pbm
 
 experiment:
   name: default
