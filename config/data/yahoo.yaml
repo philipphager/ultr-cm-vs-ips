@@ -5,7 +5,7 @@ _target_: src.data.Yahoo
 name: Yahoo
 fold: 1
 n_features: 699
-n_results: 100
+n_results: 49 # 90th percentile
 
 pipeline:
   truncate:

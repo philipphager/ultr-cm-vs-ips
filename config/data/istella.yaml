@@ -5,7 +5,7 @@ _target_: src.data.Istella
 name: Istella-S
 fold: 1
 n_features: 220
-n_results: 100
+n_results: 147 # 90th percentile
 
 pipeline:
   normalize:

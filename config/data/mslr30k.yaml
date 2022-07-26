@@ -5,7 +5,7 @@ _target_: src.data.MSLR30K
 name: MSLR-Web30K
 fold: 1
 n_features: 136
-n_results: 100
+n_results: 201 # 90th percentile
 
 pipeline:
   normalize:
