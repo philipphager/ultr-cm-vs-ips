@@ -51,8 +51,9 @@ class IPS(LightningModule):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.relevance(x).squeeze()
 
-    def predict(self, x: torch.Tensor) -> torch.Tensor:
-        return torch.sigmoid(self.relevance(x)).squeeze()
+    def predict_step(self, batch, idx, **kwargs):
+        x, y, y_click, n = batch
+        return self.forward(x)
 
     def training_step(self, batch, idx):
         x, y, y_click, n = batch
