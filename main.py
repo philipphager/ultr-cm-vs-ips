@@ -45,7 +45,7 @@ def main(config: DictConfig):
 
     trainer.fit(model, train_loader, val_loader)
 
-    y_predict = torch.cat(model.predict(dataloaders=test_loader))
+    y_predict = torch.cat(trainer.predict(dataloaders=test_loader))
     print(get_metrics(y_predict, test.y, test.n, "test_"))
 
 
