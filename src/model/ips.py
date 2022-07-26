@@ -52,25 +52,25 @@ class IPS(LightningModule):
         return self.relevance(x).squeeze()
 
     def predict_step(self, batch, idx, **kwargs):
-        q, n, x, y = batch # RatingDataset
+        q, n, x, y = batch  # RatingDataset
         return self.relevance(x).squeeze()
 
     def training_step(self, batch, idx):
-        q, n, x, y, y_click = batch # ClickDataset
+        q, n, x, y, y_click = batch  # ClickDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)
-        loss = self.loss(y_predict, y_click, n, self.position_bias[:n_results])
+        loss = self.loss(y_predict, y_click, n, self.position_bias)
 
         self.log("train_loss", loss)
         return loss
 
     def validation_step(self, batch, idx):
-        q, n, x, y, y_click = batch # ClickDataset
+        q, n, x, y, y_click = batch  # ClickDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)
-        loss = self.loss(y_predict, y_click, n, self.position_bias[:n_results])
+        loss = self.loss(y_predict, y_click, n, self.position_bias)
         metrics = get_metrics(torch.sigmoid(y_predict), y, n, "val_")
 
         self.log("val_loss", loss)
@@ -78,11 +78,11 @@ class IPS(LightningModule):
         return loss
 
     def test_step(self, batch, idx):
-        q, n, x, y, y_click = batch # ClickDataset
+        q, n, x, y, y_click = batch  # ClickDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)
-        loss = self.loss(y_predict, y_click, n, self.position_bias[:n_results])
+        loss = self.loss(y_predict, y_click, n, self.position_bias)
         metrics = get_metrics(torch.sigmoid(y_predict), y, n, "test_")
 
         self.log("test_loss", loss)

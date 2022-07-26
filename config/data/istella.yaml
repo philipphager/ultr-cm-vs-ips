@@ -5,6 +5,7 @@ _target_: src.data.Istella
 name: Istella-S
 fold: 1
 n_features: 220
+n_results: 100
 
 pipeline:
   normalize:
@@ -14,5 +15,5 @@ pipeline:
     - _target_: src.data.preprocessing.Log1pNormalize
   truncate:
     - _target_: src.data.preprocessing.StratifiedTruncate
-      max_length: 100
+      max_length: "${data.n_results}"
       random_state: 0

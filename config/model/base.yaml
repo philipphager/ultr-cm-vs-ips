@@ -3,5 +3,5 @@ name: ???
 layers: ???
 dropouts: ???
 activation: ???
-n_results: 1_500
+n_results: "${data.n_results}"
 n_features: "${data.n_features}"

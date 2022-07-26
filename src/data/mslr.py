@@ -18,8 +18,10 @@ class MSLR10K(DatasetLoader):
     file = "MSLR-WEB10K"
     checksum = "2902142ea33f18c59414f654212de5063033b707d5c3939556124b1120d3a0ba"
 
-    def __init__(self, name: str, fold: int, n_features: int, pipeline: Pipeline):
-        super().__init__(name, fold, n_features, pipeline)
+    def __init__(
+        self, name: str, fold: int, n_features: int, n_results: int, pipeline: Pipeline
+    ):
+        super().__init__(name, fold, n_features, n_results, pipeline)
 
     def _parse(self, split: str) -> pd.DataFrame:
         zip_path = download(self.url, self.download_directory / self.zip_file)
@@ -46,8 +48,10 @@ class MSLR30K(DatasetLoader):
     file = "MSLR-WEB30K"
     checksum = "08cb7977e1d5cbdeb57a9a2537a0923dbca6d46a76db9a6afc69e043c85341ae"
 
-    def __init__(self, name: str, fold: int, n_features: int, pipeline: Pipeline):
-        super().__init__(name, fold, n_features, pipeline)
+    def __init__(
+        self, name: str, fold: int, n_features: int, n_results: int, pipeline: Pipeline
+    ):
+        super().__init__(name, fold, n_features, n_results, pipeline)
 
     def _parse(self, split: str) -> pd.DataFrame:
         zip_path = download(self.url, self.download_directory / self.zip_file)

@@ -18,8 +18,10 @@ class Istella(DatasetLoader):
     file = "ISTELLA"
     checksum = "41b21116a3650cc043dbe16f02ee39f4467f9405b37fdbcc9a6a05e230a38981"
 
-    def __init__(self, name: str, fold: int, n_features: int, pipeline: Pipeline):
-        super().__init__(name, fold, n_features, pipeline)
+    def __init__(
+        self, name: str, fold: int, n_features: int, n_results: int, pipeline: Pipeline
+    ):
+        super().__init__(name, fold, n_features, n_results, pipeline)
 
     def _parse(self, split: str) -> pd.DataFrame:
         zip_path = download(self.url, self.download_directory / self.zip_file)

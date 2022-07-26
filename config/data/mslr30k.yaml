@@ -5,11 +5,12 @@ _target_: src.data.MSLR30K
 name: MSLR-Web30K
 fold: 1
 n_features: 136
+n_results: 100
 
 pipeline:
   normalize:
     - _target_: src.data.preprocessing.Log1pNormalize
   truncate:
     - _target_: src.data.preprocessing.StratifiedTruncate
-      max_length: 100
+      max_length: "${data.n_results}"
       random_state: 0

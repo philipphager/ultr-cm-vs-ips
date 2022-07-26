@@ -12,8 +12,8 @@ class Yahoo(DatasetLoader):
     file = "ltrc_yahoo"
     checksum = "d82bcaa8eae8f89db88c87a9fce819ec6fa86dba3fa8b09e531364cc23f916a7"
 
-    def __init__(self, name: str, fold: int, n_features: int, pipeline: Pipeline):
-        super().__init__(name, fold, n_features, pipeline)
+    def __init__(self, name: str, fold: int, n_features: int, n_results: int, pipeline: Pipeline):
+        super().__init__(name, fold, n_features, n_results, pipeline)
 
     def _parse(self, split: str) -> pd.DataFrame:
         zip_path = self.download_directory / self.zip_file

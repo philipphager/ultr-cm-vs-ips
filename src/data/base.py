@@ -8,10 +8,11 @@ from src.data.preprocessing import Pipeline
 
 
 class DatasetLoader(ABC):
-    def __init__(self, name: str, fold: int, n_features: int, pipeline: Pipeline):
+    def __init__(self, name: str, fold: int, n_features: int, n_results: int, pipeline: Pipeline):
         self.name = name
         self.fold = fold
         self.n_features = n_features
+        self.n_results = n_results
         self.pipeline = pipeline
 
         assert fold in self.folds
