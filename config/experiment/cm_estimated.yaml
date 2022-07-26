@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - override /model: cm
+
+model:
+  name: "Neural PBM - Estimated bias"
+  position_bias: null

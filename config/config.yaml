@@ -27,13 +27,13 @@ train_loader:
   _target_: torch.utils.data.DataLoader
   dataset: ???
   batch_size: 50
-  shuffle: true
+  shuffle: True
 
 val_test_loader:
   _target_: torch.utils.data.DataLoader
   dataset: ???
   batch_size: 500
-  shuffle: false
+  shuffle: False
 
 
 hydra:
@@ -45,3 +45,9 @@ hydra:
   sweep:
     dir: results/${experiment.name}
     subdir: ${hydra.job.override_dirname}
+  launcher:
+    mem_gb: 32
+    cpus_per_task: 4
+    array_parallelism: 4
+    partition: gpu
+    gres: gpu:1

@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - override /model: ips
+
+model:
+  name: "Pointwise IPS - Unbiased"
+  position_bias: 1.0
