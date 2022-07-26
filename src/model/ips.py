@@ -52,11 +52,11 @@ class IPS(LightningModule):
         return self.relevance(x).squeeze()
 
     def predict_step(self, batch, idx, **kwargs):
-        x, y, y_click, n = batch
-        return self.forward(x)
+        q, n, x, y = batch # RatingDataset
+        return self.relevance(x).squeeze()
 
     def training_step(self, batch, idx):
-        x, y, y_click, n = batch
+        q, n, x, y, y_click = batch # ClickDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)
@@ -66,7 +66,7 @@ class IPS(LightningModule):
         return loss
 
     def validation_step(self, batch, idx):
-        x, y, y_click, n = batch
+        q, n, x, y, y_click = batch # ClickDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)
@@ -78,7 +78,7 @@ class IPS(LightningModule):
         return loss
 
     def test_step(self, batch, idx):
-        x, y, y_click, n = batch
+        q, n, x, y, y_click = batch # ClickDataset
         _, n_results = y.shape
 
         y_predict = self.forward(x)

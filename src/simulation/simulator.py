@@ -30,12 +30,13 @@ class ClickDataset(Dataset):
     def __getitem__(self, i: int):
         query_id = self.query_ids[i]
 
+        q = self.q[query_id]
         n = self.n[query_id]
         x = self.x[query_id]
         y = self.y[query_id]
         y_click = self.y_clicks[i].float()
 
-        return x, y, y_click, n
+        return q, n, x, y, y_click
 
 
 class Simulator:
