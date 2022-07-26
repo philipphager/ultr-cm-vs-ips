@@ -1,6 +1,6 @@
 defaults:
   - _self_
-  - data: mslr10k
+  - data: yahoo
   - baseline: lgbm
   - simulation: graded-pbm
   - model: ips
@@ -10,7 +10,7 @@ experiment:
 
 trainer:
   _target_: pytorch_lightning.Trainer
-  max_epochs: 1
+  max_epochs: 100
   accelerator: auto
   callbacks:
     -
