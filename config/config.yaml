@@ -8,6 +8,8 @@ defaults:
 experiment:
   name: default
 
+random_state: 0
+
 trainer:
   _target_: pytorch_lightning.Trainer
   max_epochs: 100

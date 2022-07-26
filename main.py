@@ -4,6 +4,7 @@ import os
 import hydra
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
+from pytorch_lightning import seed_everything
 
 from src.data.preprocessing.util import random_split
 from src.metric import get_metrics
@@ -13,6 +14,8 @@ from src.metric import get_metrics
 def main(config: DictConfig):
     print(OmegaConf.to_yaml(config))
     print("Working directory : {}".format(os.getcwd()))
+
+    seed_everything(config.random_state)
 
     data = instantiate(config.data)
     train = data.load("train")
@@ -47,7 +50,6 @@ def main(config: DictConfig):
 
     y_predict = torch.cat(trainer.predict(dataloaders=test_loader))
     print(get_metrics(y_predict, test.y, test.n, "test_"))
-
 
 
 if __name__ == "__main__":

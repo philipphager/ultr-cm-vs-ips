@@ -41,13 +41,11 @@ class Pipeline:
         normalize: List[ColumnTransformation] = [],
         truncate: List[Transformation] = [],
         filter: List[Transformation] = [],
-        random_state: int = 0,
     ):
         self.normalize = self.from_omega_conf(normalize)
         self.truncate = self.from_omega_conf(truncate)
         self.filter = self.from_omega_conf(filter)
         self.convert = ToTorch()
-        self.random_state = random_state
 
     def __call__(self, df: pd.DataFrame) -> RatingDataset:
         print("\n##### PREPROCESSING #####")

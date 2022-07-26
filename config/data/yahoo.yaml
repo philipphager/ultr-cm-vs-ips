@@ -11,4 +11,4 @@ pipeline:
   truncate:
     - _target_: src.data.preprocessing.StratifiedTruncate
       max_length: "${data.n_results}"
-      random_state: 0
+      random_state: "${random_state}"
