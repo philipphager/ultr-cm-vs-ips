@@ -22,18 +22,27 @@ def main(config: DictConfig):
     baseline_model.fit(baseline)
 
     val_split = len(val) / len(train)
-    train_clicks = config.simulation.n_clicks
-    val_clicks = int(train_clicks * val_split)
-    print(f"Simulating {train_clicks} train clicks")
-    print(f"Simulating {val_clicks} val clicks ({val_split:.4f}%) of train")
+    train_sessions = config.simulation.n_sessions
+    val_sessions = min(1, int(train_sessions * val_split))
+    print(f"Simulating {train_sessions} train sessions")
+    print(f"Simulating {val_sessions} val sessions ({val_split:.4f}%) of train")
 
     simulator = instantiate(config.simulation.simulator, baseline_model=baseline_model)
     train = simulator(
-        train, n_clicks=train_clicks, aggregate=config.simulation.aggregate_clicks
+        train, n_sessions=train_sessions, aggregate=config.simulation.aggregate_clicks
     )
     val = simulator(
-        val, n_clicks=val_clicks, aggregate=config.simulation.aggregate_clicks
+        val, n_sessions=val_sessions, aggregate=config.simulation.aggregate_clicks
     )
+
+    model = instantiate(config.model)
+    train_loader = instantiate(config.train_loader, dataset=train)
+    val_loader = instantiate(config.val_test_loader, dataset=val)
+    test_loader = instantiate(config.val_test_loader, dataset=test)
+    trainer = instantiate(config.trainer)
+
+    trainer.fit(model, train_loader, val_loader)
+    trainer.test(test_loader)
 
 
 if __name__ == "__main__":
