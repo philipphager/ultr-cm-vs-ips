@@ -75,7 +75,7 @@ class Simulator:
             else:
                 # Convert to boolean mask
                 clicks = clicks == 1
-                query_id = torch.full((n_sessions,), i)
+                query_id = torch.full((sessions_per_query[i],), i)
 
             query_ids.append(query_id)
             y_clicks.append(clicks)
