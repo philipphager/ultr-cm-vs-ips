@@ -5,14 +5,14 @@ import torch.nn.functional as F
 from torch import nn
 
 
-class BinaryCrossEntropy(nn.Module):
+class BinaryCrossEntropyWithLogits(nn.Module):
     def forward(
         self,
         y_predict: torch.Tensor,
         y_true: torch.Tensor,
         n: torch.Tensor,
         position_bias: Optional[torch.Tensor] = None,
-        clip: Optional[float] = 0.01,
+        clip: Optional[float] = None,
         eps: float = 1e-10,
     ) -> torch.float:
         """
@@ -55,7 +55,7 @@ class PairwiseHinge(nn.Module):
         y_true: torch.Tensor,
         n: torch.Tensor,
         position_bias: Optional[torch.Tensor] = None,
-        clip: Optional[float] = 0.01,
+        clip: Optional[float] = None,
         margin: float = 1.0,
     ) -> torch.float:
         """
@@ -108,7 +108,7 @@ class ListNet(nn.Module):
         y_true: torch.Tensor,
         n: torch.Tensor,
         position_bias: Optional[torch.Tensor] = None,
-        clip: Optional[float] = 0.01,
+        clip: Optional[float] = None,
         eps: float = 1e-10,
     ) -> torch.float:
         """
