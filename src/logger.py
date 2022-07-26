@@ -22,9 +22,9 @@ class LocalLogger(LightningLoggerBase):
 
     @rank_zero_only
     def log_metrics(self, metrics, step):
-        if "val_loss" in metrics:
+        if "val_ndcg" in metrics:
             self.results["val"].append(metrics)
-        elif "test_loss" in metrics:
+        elif "test_ndcg" in metrics:
             self.results["test"].append(metrics)
 
     @rank_zero_only
@@ -38,6 +38,3 @@ class LocalLogger(LightningLoggerBase):
         # Optional. Any code that needs to be run after training
         # finishes goes here
         pass
-
-    def should_log(self, metrics):
-        return any([f"{s}_loss" in metrics for s in self.steps])
