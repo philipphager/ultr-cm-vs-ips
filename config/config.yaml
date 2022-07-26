@@ -1,6 +1,7 @@
 defaults:
   - _self_
   - data: istella
+  - baseline: lgbm
 
 experiment:
   name: default

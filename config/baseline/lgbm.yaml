@@ -1,7 +1,4 @@
-defaults:
-  - base
-
-_target_: ultr_evaluation_tips.model.LightGBMRanker
+_target_: src.baseline.LightGBMRanker
 name: LightGBM
 objective: lambdarank
 boosting_type: gbdt # LambdaMART = LambdaRank + Gradient Boosted Decision Trees

@@ -4,8 +4,6 @@ import hydra
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from src.data.preprocessing.util import random_split
-
 
 @hydra.main(config_path="config", config_name="config", version_base="1.2")
 def main(config: DictConfig):
@@ -13,15 +11,14 @@ def main(config: DictConfig):
     print("Working directory : {}".format(os.getcwd()))
 
     data = instantiate(config.data)
-    baseline_model = instantiate(config.baseline)
 
-    train = data.load("train")
-    val = data.load("val")
-    test = data.load("test")
+    train_df = data.load("train")
+    val_df = data.load("val")
+    test_df = data.load("test")
 
-    baseline, train = random_split(train, frac=0.01)
-    baseline_model.fit(baseline)
-
+    random_sample()
+    baseline_ranker = instantiate(config.baseline)
+    baseline_ranker.train()
 
 if __name__ == "__main__":
     main()

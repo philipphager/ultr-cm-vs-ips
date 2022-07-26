@@ -3,12 +3,11 @@ from typing import Optional
 import torch
 from lightgbm import LGBMRanker, early_stopping
 
-from ultr_evaluation_tips.loss import mask_padding
-from ultr_evaluation_tips.model.base import Model
-from ultr_evaluation_tips.preprocessing.convert import RatingDataset
+from src.loss import mask_padding
+from src.data.preprocessing.convert import RatingDataset
 
 
-class LightGBMRanker(Model):
+class LightGBMRanker:
     def __init__(
         self,
         objective: str,
@@ -68,7 +67,6 @@ class LightGBMRanker(Model):
         y_predict = y_predict.reshape(n_batch, n_results)
 
         return mask_padding(y_predict, n, fill=-torch.inf)
-
 
     @staticmethod
     def to_lightgbm(dataset: RatingDataset):
