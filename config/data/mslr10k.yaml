@@ -9,4 +9,7 @@ n_features: 136
 pipeline:
   normalize:
     - _target_: src.data.preprocessing.Log1pNormalize
-
+  truncate:
+    - _target_: src.data.preprocessing.StratifiedTruncate
+      max_length: 100
+      random_state: 0

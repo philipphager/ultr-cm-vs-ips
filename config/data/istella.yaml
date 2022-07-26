@@ -12,3 +12,7 @@ pipeline:
       _target_: src.data.preprocessing.ClipNormalize
       max_value: 1e9
     - _target_: src.data.preprocessing.Log1pNormalize
+  truncate:
+    - _target_: src.data.preprocessing.StratifiedTruncate
+      max_length: 100
+      random_state: 0

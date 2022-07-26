@@ -5,3 +5,9 @@ _target_: src.data.Yahoo
 name: Yahoo
 fold: 1
 n_features: 699
+
+pipeline:
+  truncate:
+    - _target_: src.data.preprocessing.StratifiedTruncate
+      max_length: 100
+      random_state: 0
