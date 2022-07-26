@@ -5,3 +5,7 @@ _target_: src.data.MSLR30K
 name: MSLR-Web30K
 fold: 1
 n_features: 136
+
+pipeline:
+  normalize:
+    - _target_: src.data.preprocessing.Log1pNormalize
