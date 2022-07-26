@@ -3,7 +3,7 @@ defaults:
   - data: mslr10k
   - baseline: lgbm
   - simulation: graded-pbm
-  - model: cm
+  - model: ips
 
 experiment:
   name: default
@@ -14,7 +14,7 @@ trainer:
   _target_: pytorch_lightning.Trainer
   max_epochs: 1
   accelerator: auto
-  val_check_interval: 10_000 # Evaluate every 500k clicks
+  # val_check_interval: 10_000 # Evaluate every 500k clicks, use when not aggregating clicks
   logger:
     - _target_: src.logger.LocalLogger
   callbacks:
