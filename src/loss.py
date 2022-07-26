@@ -5,6 +5,24 @@ import torch.nn.functional as F
 from torch import nn
 
 
+class BinaryCrossEntropy(nn.Module):
+    def forward(
+        self,
+        y_predict: torch.Tensor,
+        y_true: torch.Tensor,
+        n: torch.Tensor,
+        eps: float = 1e-10,
+    ) -> torch.float:
+
+        loss = -(
+            (y_true) * torch.log(y_predict.clip(min=eps))
+            + (1 - y_true) * torch.log((1 - y_predict).clip(min=eps))
+        )
+
+        loss = mask_padding(loss, n)
+        return loss.sum(dim=1).mean()
+
+
 class BinaryCrossEntropyWithLogits(nn.Module):
     def forward(
         self,

@@ -1,0 +1,14 @@
+defaults:
+  - base
+
+_target_: src.model.NeuralPBM
+name: Neural PBM
+loss:
+  _target_: src.loss.BinaryCrossEntropy
+optimizer: adagrad
+learning_rate: 0.003
+position_bias: 1.0
+layers: [512, 256, 128]
+dropouts: [0, 0.1, 0.1]
+activation:
+  _target_: torch.nn.ELU
