@@ -1,11 +1,35 @@
 defaults:
   - _self_
-  - data: mslr30k
+  - data: mslr10k
   - baseline: lgbm
   - simulation: graded-pbm
+  - model: ips
 
 experiment:
   name: default
+
+trainer:
+  _target_: pytorch_lightning.Trainer
+  max_epochs: 1
+  accelerator: auto
+  callbacks:
+    -
+     _target_: pytorch_lightning.callbacks.EarlyStopping
+     monitor: val_loss
+     patience: 5
+
+train_loader:
+  _target_: torch.utils.data.DataLoader
+  dataset: ???
+  batch_size: 50
+  shuffle: true
+
+val_test_loader:
+  _target_: torch.utils.data.DataLoader
+  dataset: ???
+  batch_size: 500
+  shuffle: false
+
 
 hydra:
   job:
