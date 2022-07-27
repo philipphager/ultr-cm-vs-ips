@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - override /model: ips
+
+model:
+  name: "Full Information"
+  position_bias: 0
+
+simulation:
+  simulator:
+    user_model:
+      position_bias: 0
+      noise: 0
