@@ -21,7 +21,7 @@ def main(config: DictConfig):
     test = data.load("test")
 
     baseline_model = instantiate(config.baseline)
-    baseline, train = random_split(train, frac=0.01)
+    baseline, train = random_split(train, n=20)
     baseline_model.fit(baseline)
     baseline_model.test(test)
 
