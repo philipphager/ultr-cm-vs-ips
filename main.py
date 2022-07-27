@@ -23,6 +23,7 @@ def main(config: DictConfig):
     baseline_model = instantiate(config.baseline)
     baseline, train = random_split(train, frac=0.01)
     baseline_model.fit(baseline)
+    baseline_model.test(test)
 
     val_split = len(val) / len(train)
     train_sessions = config.simulation.n_sessions

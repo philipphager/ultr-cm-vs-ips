@@ -1,10 +1,12 @@
 from typing import Optional
 
+import pandas as pd
 import torch
 from lightgbm import LGBMRanker, early_stopping
 
 from src.data.preprocessing.convert import RatingDataset
 from src.loss import mask_padding
+from src.metric import get_metrics
 
 
 class LightGBMRanker:
@@ -67,6 +69,18 @@ class LightGBMRanker:
         y_predict = y_predict.reshape(n_batch, n_results)
 
         return mask_padding(y_predict, n, fill=-torch.inf)
+
+    def test(self, dataset: RatingDataset, file: Optional[str] = "baseline.parquet"):
+        q, n, x, y = dataset[:]
+        y_predict = self.predict(dataset)
+
+        metrics = get_metrics(y_predict, y, n, "test_")
+        metrics = {k: float(v.numpy()) for k, v in metrics.items()}
+        print("Test performance of baseline:", metrics)
+
+        if file is not None:
+            df = pd.DataFrame([metrics])
+            df.to_parquet(file)
 
     @staticmethod
     def to_lightgbm(dataset: RatingDataset):
