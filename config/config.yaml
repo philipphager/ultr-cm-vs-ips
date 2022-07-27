@@ -12,7 +12,7 @@ random_state: 0
 
 trainer:
   _target_: pytorch_lightning.Trainer
-  max_epochs: 100
+  max_epochs: 200
   accelerator: auto
   # val_check_interval: 10_000 # Evaluate every 500k clicks, use when not aggregating clicks
   logger:
