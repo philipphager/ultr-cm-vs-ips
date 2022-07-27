@@ -48,6 +48,9 @@ def main(config: DictConfig):
     trainer.fit(model, train_loader, val_loader)
     trainer.test(dataloaders=test_loader, ckpt_path="best")
 
+    print("Learned position bias")
+    print(model.get_position_bias())
+
 
 if __name__ == "__main__":
     main()

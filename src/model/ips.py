@@ -80,3 +80,6 @@ class IPS(LightningModule):
 
         self.log_dict(metrics)
         return metrics
+
+    def get_position_bias(self):
+        return self.position_bias
