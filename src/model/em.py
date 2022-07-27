@@ -1,6 +1,7 @@
 from typing import Optional, List, Union
 
 import torch
+from pytorch_lightning import LightningModule
 from torch import nn
 
 from src.metric import get_metrics
@@ -8,7 +9,7 @@ from src.model.base import create_sequential
 from src.simulation.bias import get_position_bias
 
 
-class RegressionEM(nn.Module):
+class RegressionEM(LightningModule):
     def __init__(
         self,
         name: str,
@@ -25,7 +26,6 @@ class RegressionEM(nn.Module):
     ):
 
         super().__init__()
-
         self.name = name
         self.n_results = n_results
         self.loss = loss
@@ -33,7 +33,6 @@ class RegressionEM(nn.Module):
         self.em_step_size = em_step_size
         self.optimizer = optimizer
         self.relevance = create_sequential(n_features, layers, dropouts, activation)
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
         if position_bias is not None:
             self.examination = get_position_bias(n_results, position_bias).to(
@@ -57,7 +56,7 @@ class RegressionEM(nn.Module):
                 f"Expected optimizer: adam, adagrad but found: {self.optimizer}"
             )
 
-    def train_step(self, batch):
+    def training_step(self, batch):
         q, n, x, y, y_click = batch  # ClickDataset
         n_batch = x.size(0)
 
@@ -76,7 +75,7 @@ class RegressionEM(nn.Module):
         # uses bernoulli samples and trains a LGBM classifier for document relevance.
         # Thus, we fit our relevance network to samples here.
         relevance_samples = torch.bernoulli(p_r1)
-        loss = self.loss(relevance, relevance_samples.detach())
+        loss = self.loss(relevance, relevance_samples.detach(), n)
 
         if self.perform_maximization_step:
             with torch.no_grad():
