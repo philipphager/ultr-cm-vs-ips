@@ -3,8 +3,8 @@ from typing import Optional
 import torch
 from lightgbm import LGBMRanker, early_stopping
 
-from src.loss import mask_padding
 from src.data.preprocessing.convert import RatingDataset
+from src.loss import mask_padding
 
 
 class LightGBMRanker:
