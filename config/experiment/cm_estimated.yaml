@@ -5,3 +5,5 @@ defaults:
 model:
   name: "Neural PBM - Estimated bias"
   position_bias: null
+  learning_rate: 0.05
+  optimizer: sgd-momentum

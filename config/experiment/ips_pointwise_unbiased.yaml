@@ -5,3 +5,5 @@ defaults:
 model:
   name: "Pointwise IPS - Unbiased"
   position_bias: 1.0
+  learning_rate: 0.0005
+  optimizer: adam
