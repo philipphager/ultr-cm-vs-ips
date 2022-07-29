@@ -43,8 +43,6 @@ class IPS(LightningModule):
             return torch.optim.Adagrad(self.parameters(), lr=self.learning_rate)
         elif self.optimizer == "sgd":
             return torch.optim.SGD(self.parameters(), lr=self.learning_rate)
-        elif self.optimizer == "sgd-momentum":
-            return torch.optim.SGD(self.parameters(), lr=self.learning_rate, momentum=0.9)
         else:
             raise ValueError(f"Unsupported optimizer: {self.optimizer}")
 
