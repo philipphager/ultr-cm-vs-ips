@@ -5,8 +5,8 @@ _target_: src.model.IPS
 name: IPS
 loss:
   _target_: src.loss.BinaryCrossEntropyWithLogits
-optimizer: ???
-learning_rate: ???
+optimizer: adam
+learning_rate: 0.0001
 position_bias: 1.0
 layers: [512, 256, 128]
 dropouts: [0, 0.1, 0.1]
