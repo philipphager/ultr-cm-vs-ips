@@ -2,7 +2,7 @@
 
 python main.py -m \
     hydra/launcher=submitit_slurm \
-    data=mslr30k \
+    data=mslr30k,istella,yahoo \
     experiment.name="hyperparameters" \
     "+experiment=ips_pointwise_unbiased,cm_unbiased,cm_estimated" \
     model.optimizer=sgd,adam,adagrad \
