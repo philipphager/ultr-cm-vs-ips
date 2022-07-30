@@ -4,6 +4,4 @@ defaults:
 
 model:
   name: "Neural PBM - Unbiased"
-  position_bias: 1.0
-  learning_rate: 0.0001
-  optimizer: adam
+  position_bias: "${simulation.simulator.user_model.position_bias}"
