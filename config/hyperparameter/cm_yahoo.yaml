@@ -1,0 +1,5 @@
+# @package _global_
+
+model:
+  optimizer: adam
+  learning_rate: 0.0001

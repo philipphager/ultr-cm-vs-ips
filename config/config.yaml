@@ -1,9 +1,10 @@
 defaults:
   - _self_
-  - data: yahoo
+  - data: istella
   - baseline: lgbm
   - simulation: graded-pbm
-  - model: cm
+  - model: ips
+  - hyperparameter: "${model}_${data}"
 
 experiment:
   name: default

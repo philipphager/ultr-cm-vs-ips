@@ -1,0 +1,14 @@
+defaults:
+  - base
+
+_target_: src.model.NeuralPBM
+name: Neural PBM - Estimated bias
+loss:
+  _target_: src.loss.BinaryCrossEntropy
+optimizer: adam
+learning_rate: 0.0001
+position_bias: null
+layers: [512, 256, 128]
+dropouts: [0, 0.1, 0.1]
+activation:
+  _target_: torch.nn.ELU
