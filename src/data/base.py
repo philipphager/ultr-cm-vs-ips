@@ -14,24 +14,25 @@ class DatasetLoader(ABC):
         self.n_features = n_features
         self.n_results = n_results
         self.pipeline = pipeline
+        self.base_dir = Path("/ivi/ilps/personal/sgupta/philipp-project/")
 
         assert fold in self.folds
 
     @property
     def cache_directory(self):
-        path = Path.home() / ".ltr_datasets" / "cache"
+        path = self.base_dir / "ltr_datasets" / "cache"
         path.mkdir(parents=True, exist_ok=True)
         return path
 
     @property
     def dataset_directory(self):
-        path = Path.home() / ".ltr_datasets" / "dataset"
+        path = self.base_dir/ "ltr_datasets" / "dataset"
         path.mkdir(parents=True, exist_ok=True)
         return path
 
     @property
     def download_directory(self):
-        path = Path.home() / ".ltr_datasets" / "download"
+        path = self.base_dir / "ltr_datasets" / "download"
         path.mkdir(parents=True, exist_ok=True)
         return path
 
