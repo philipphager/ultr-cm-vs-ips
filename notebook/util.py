@@ -73,7 +73,7 @@ def load_experiment(experiment: str, directory: Path = Path("results")):
             frames["test"].append(test_df)
 
     baseline_df = (
-        _rename(pd.concat(frames["baseline"]), "baseline") if len(frames["baseline"]) > 0 else None
+        _rename(pd.concat(frames["baseline"]), "test") if len(frames["baseline"]) > 0 else None
     )
     val_df = (
         _rename(pd.concat(frames["val"]), "val") if len(frames["val"]) > 0 else None
