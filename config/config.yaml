@@ -42,9 +42,9 @@ hydra:
     chdir: True
   output_subdir: .
   run:
-    dir: results/${experiment.name}
+    dir: /ivi/ilps/personal/phager/ultr-cm-vs-ips/results/${experiment.name}
   sweep:
-    dir: results/${experiment.name}
+    dir: /ivi/ilps/personal/phager/ultr-cm-vs-ips/results/${experiment.name}
     subdir: ${hydra.job.override_dirname}
   launcher:
     mem_gb: 32
