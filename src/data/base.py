@@ -48,7 +48,7 @@ class DatasetLoader(ABC):
             df.to_parquet(path)
 
         df = pd.read_parquet(path)
-        return self.pipeline(df)
+        return self.pipeline(df, split)
 
     @property
     @abstractmethod
