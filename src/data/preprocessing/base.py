@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from pathlib import Path
 from typing import List, Union
 
 import pandas as pd
@@ -48,26 +47,15 @@ class Pipeline:
         self.filter = self.from_omega_conf(filter)
         self.convert = ToTorch()
 
-    def __call__(self, df: pd.DataFrame, split) -> RatingDataset:
+    def __call__(self, df: pd.DataFrame) -> RatingDataset:
         print("\n##### PREPROCESSING #####")
         print("\n##### STATS BEFORE #####")
         self.print_stats(df)
 
-        path = Path.home() / ".ltr_datasets" / "processed"
-        path.mkdir(parents=True, exist_ok=True)
-        file = path / f"{split}.parquet"
-
-        if not file.exists():
-
-            print("\n##### STEPS #####")
-            df = apply(self.normalize, df)
-            df = apply(self.truncate, df)
-            df = apply(self.filter, df)
-            df.to_parquet(file)
-        else:
-            print("Using cached file", file)
-            df = pd.read_parquet(file)
-
+        print("\n##### STEPS #####")
+        df = apply(self.normalize, df)
+        df = apply(self.truncate, df)
+        df = apply(self.filter, df)
         dataset = self.convert(df)
 
         print("\n##### STATS AFTER #####")
