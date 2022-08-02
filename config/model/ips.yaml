@@ -8,7 +8,7 @@ loss:
 optimizer: adam
 learning_rate: 0.0001
 position_bias: 1.0
-layers: [32]
-dropouts: [0]
+layers: [32, 32]
+dropouts: [0, 0]
 activation:
   _target_: torch.nn.ELU
