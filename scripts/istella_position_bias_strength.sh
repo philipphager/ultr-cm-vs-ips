@@ -2,7 +2,7 @@
 
 python main.py -m \
     hydra/launcher=submitit_slurm \
-    data=yahoo \
+    data=istella \
     experiment.name="position_bias_strength" \
     "+experiment=ips_pointwise_unbiased,cm_unbiased" \
     simulation.n_sessions=100_000_000 \
