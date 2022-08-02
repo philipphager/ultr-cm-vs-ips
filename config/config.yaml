@@ -49,6 +49,6 @@ hydra:
   launcher:
     mem_gb: 32
     cpus_per_task: 4
-    array_parallelism: 4
+    array_parallelism: 2
     partition: gpu
     gres: gpu:1
