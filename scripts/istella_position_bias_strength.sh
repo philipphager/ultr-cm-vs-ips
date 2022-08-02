@@ -5,8 +5,7 @@ python main.py -m \
     data=istella \
     experiment.name="position_bias_strength" \
     "+experiment=ips_pointwise_unbiased,cm_unbiased" \
-    simulation=binary-pbm \
     simulation.n_sessions=100_000_000 \
     simulation.aggregate_clicks=True \
     simulation.simulator.user_model.position_bias=0,0.5,1.0,1.5,2.0 \
-    random_state=0
+    random_state=0,1,2,3,4,5,6,7,8,9
