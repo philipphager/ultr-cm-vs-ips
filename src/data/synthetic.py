@@ -39,7 +39,7 @@ class Synthetic(DatasetLoader):
             x = torch.randint(self.n_features, shape, generator=generator)
 
         y = relevance[x]
-        x = F.one_hot(x)
+        x = F.one_hot(x, num_classes=self.n_features)
 
         return RatingDataset(q, n, x, y)
 
