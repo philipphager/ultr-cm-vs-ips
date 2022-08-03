@@ -1,6 +1,6 @@
 defaults:
   - _self_
-  - data: istella
+  - data: synthetic
   - baseline: lgbm
   - simulation: graded-pbm
   - model: ips

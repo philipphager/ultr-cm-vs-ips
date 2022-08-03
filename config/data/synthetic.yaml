@@ -1,0 +1,8 @@
+defaults:
+  - base
+
+_target_: src.data.Yahoo
+name: Synthetic
+fold: 1
+n_features: 1_000
+n_results: 50
