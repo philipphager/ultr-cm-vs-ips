@@ -4,5 +4,5 @@ defaults:
 _target_: src.data.Synthetic
 name: Synthetic
 fold: 1
-n_features: 50_000
-n_results: 50
+n_features: 10_000
+n_results: 25
