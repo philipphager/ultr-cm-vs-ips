@@ -15,9 +15,11 @@ class Synthetic(DatasetLoader):
         fold: int,
         n_features: int,
         n_results: int,
+        perc_feature_collision: float,
         pipeline: Pipeline,
     ):
         super().__init__(name, fold, n_features, n_results, pipeline)
+        self.perc_feature_collision = perc_feature_collision
 
     def load(self, split: str):
         generator = torch.Generator()
@@ -35,8 +37,10 @@ class Synthetic(DatasetLoader):
         shape = (n_queries, self.n_results)
         x = torch.randperm(self.n_features, generator=generator).reshape(shape)
 
+        max_features = int(self.n_features * (1 - self.perc_feature_collision))
+
         y = relevance[x]
-        x = F.one_hot(x, num_classes=self.n_features).float()
+        x = F.one_hot(x % max_features, num_classes=self.n_features).float()
 
         return RatingDataset(q, n, x, y)
 
