@@ -20,8 +20,11 @@ class Synthetic(DatasetLoader):
         super().__init__(name, fold, n_features, n_results, pipeline)
 
     def load(self, split: str):
+        generator = torch.Generator()
+        generator.manual_seed(0)
+
         n_queries = int(self.n_features / self.n_results)
-        relevance = torch.randint(5, (self.n_features,))
+        relevance = torch.randint(5, (self.n_features,), generator=generator)
         q = torch.arange(n_queries)
         n = torch.full((n_queries,), self.n_results)
 
@@ -29,14 +32,8 @@ class Synthetic(DatasetLoader):
         generator = torch.Generator()
         generator.manual_seed(seed)
 
-        if split == "train":
-            # Create random train queries containing each document
-            shape = (n_queries, self.n_results)
-            x = torch.randperm(self.n_features, generator=generator).reshape(shape)
-        else:
-            # Create random val / test queries containing a sample of documents
-            shape = (int(n_queries), self.n_results)
-            x = torch.randint(self.n_features, shape, generator=generator)
+        shape = (n_queries, self.n_results)
+        x = torch.randperm(self.n_features, generator=generator).reshape(shape)
 
         y = relevance[x]
         x = F.one_hot(x, num_classes=self.n_features).float()

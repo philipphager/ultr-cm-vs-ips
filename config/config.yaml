@@ -10,6 +10,8 @@ experiment:
   name: default
 
 random_state: 0
+baseline_samples: 20
+drop_baseline_samples: False
 
 trainer:
   _target_: pytorch_lightning.Trainer
