@@ -23,7 +23,7 @@ class Synthetic(DatasetLoader):
         n_features = 1000
 
         n_queries = int(self.n_features / self.n_results)
-        relevance = torch.rand(n_features)
+        relevance = torch.randint(5, (n_features,))
         q = torch.arange(n_queries)
         n = torch.full((n_queries,), self.n_results)
 
