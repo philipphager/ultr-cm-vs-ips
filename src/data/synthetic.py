@@ -1,6 +1,7 @@
 from typing import List
 
 import torch
+import torch.nn.functional as F
 
 from src.data.base import DatasetLoader
 from src.data.preprocessing import Pipeline
@@ -9,16 +10,14 @@ from src.data.preprocessing.convert import RatingDataset
 
 class Synthetic(DatasetLoader):
     def __init__(
-            self,
-            name: str,
-            fold: int,
-            n_features: int,
-            n_results: int,
-            val_size: float,
-            pipeline: Pipeline,
+        self,
+        name: str,
+        fold: int,
+        n_features: int,
+        n_results: int,
+        pipeline: Pipeline,
     ):
         super().__init__(name, fold, n_features, n_results, pipeline)
-        self.val_size = val_size
 
     def load(self, split: str):
         n_features = 1000
@@ -28,7 +27,7 @@ class Synthetic(DatasetLoader):
         q = torch.arange(n_queries)
         n = torch.full((n_queries,), self.n_results)
 
-        seed = abs(hash(split)) % (10 ** 8)
+        seed = abs(hash(split)) % (10**8)
         generator = torch.Generator()
         generator.manual_seed(seed)
 
@@ -38,7 +37,7 @@ class Synthetic(DatasetLoader):
             x = torch.randperm(n_features, generator=generator).reshape(shape)
         else:
             # Create random val / test queries containing a sample of documents
-            shape = (int(n_queries * self.val_size), self.n_results)
+            shape = (int(n_queries), self.n_results)
             x = torch.randint(n_features, shape, generator=generator)
 
         y = relevance[x]
