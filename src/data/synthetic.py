@@ -16,14 +16,16 @@ class Synthetic(DatasetLoader):
         n_features: int,
         n_results: int,
         perc_feature_collision: float,
+        random_state: int,
         pipeline: Pipeline,
     ):
         super().__init__(name, fold, n_features, n_results, pipeline)
         self.perc_feature_collision = perc_feature_collision
+        self.random_state = random_state
 
     def load(self, split: str):
         generator = torch.Generator()
-        generator.manual_seed(0)
+        generator.manual_seed(self.random_state)
 
         n_queries = int(self.n_features * 2 / self.n_results)
         relevance = torch.randint(5, (self.n_features,), generator=generator)

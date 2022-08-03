@@ -7,3 +7,4 @@ fold: 1
 n_features: 10_000
 n_results: 25
 perc_feature_collision: 0.0
+random_state: "${random_state}"
