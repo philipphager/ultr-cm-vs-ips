@@ -10,4 +10,4 @@ The project automatically downloads public datasets to `~/.ltr-datasets/` on fir
 3. Run experiments in the `/scripts directory`, e.g.: `./scripts/mslr_dataset_size.sh`
 
 ## License
-This project uses the MIT license.
+This project uses the [MIT license](https://github.com/philipphager/ultr-cm-vs-ips/blob/main/LICENSE).
