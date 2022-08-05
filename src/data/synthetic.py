@@ -27,7 +27,7 @@ class Synthetic(DatasetLoader):
         generator = torch.Generator()
         generator.manual_seed(self.random_state)
 
-        n_queries = int(self.n_features * 2 / self.n_results)
+        n_queries = int(self.n_features / self.n_results)
         relevance = torch.randint(5, (self.n_features,), generator=generator)
         q = torch.arange(n_queries)
         n = torch.full((n_queries,), self.n_results)
@@ -38,9 +38,7 @@ class Synthetic(DatasetLoader):
 
         # Create random queries with two occurrences of each document.
         shape = (n_queries, self.n_results)
-        x = torch.randperm(self.n_features * 2, generator=generator).reshape(shape)
-        x = x % self.n_features
-
+        x = torch.randperm(self.n_features, generator=generator).reshape(shape)
         max_features = int(self.n_features * (1 - self.perc_feature_collision))
 
         y = relevance[x]
