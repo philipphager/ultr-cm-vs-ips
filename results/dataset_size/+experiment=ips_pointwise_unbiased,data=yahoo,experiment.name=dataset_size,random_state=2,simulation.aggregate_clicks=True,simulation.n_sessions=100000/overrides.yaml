@@ -1,0 +1,6 @@
+- data=yahoo
+- experiment.name=dataset_size
+- +experiment=ips_pointwise_unbiased
+- simulation.n_sessions=100000
+- simulation.aggregate_clicks=True
+- random_state=2

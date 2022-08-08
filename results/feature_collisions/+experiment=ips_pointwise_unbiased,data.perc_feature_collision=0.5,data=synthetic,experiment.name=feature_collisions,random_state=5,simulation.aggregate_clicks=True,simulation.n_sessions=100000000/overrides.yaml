@@ -1,0 +1,7 @@
+- data=synthetic
+- experiment.name=feature_collisions
+- +experiment=ips_pointwise_unbiased
+- data.perc_feature_collision=0.5
+- simulation.n_sessions=100000000
+- simulation.aggregate_clicks=True
+- random_state=5

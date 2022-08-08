@@ -1,0 +1,8 @@
+- data=istella
+- experiment.name=hyperparameters
+- +experiment=ips_pointwise_unbiased
+- model.optimizer=sgd
+- model.learning_rate=0.01
+- simulation.n_sessions=100000000
+- simulation.aggregate_clicks=True
+- random_state=3

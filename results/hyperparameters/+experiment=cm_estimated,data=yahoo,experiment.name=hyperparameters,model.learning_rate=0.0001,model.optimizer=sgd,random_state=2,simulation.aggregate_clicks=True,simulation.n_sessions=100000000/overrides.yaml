@@ -1,0 +1,8 @@
+- data=yahoo
+- experiment.name=hyperparameters
+- +experiment=cm_estimated
+- model.optimizer=sgd
+- model.learning_rate=0.0001
+- simulation.n_sessions=100000000
+- simulation.aggregate_clicks=True
+- random_state=2

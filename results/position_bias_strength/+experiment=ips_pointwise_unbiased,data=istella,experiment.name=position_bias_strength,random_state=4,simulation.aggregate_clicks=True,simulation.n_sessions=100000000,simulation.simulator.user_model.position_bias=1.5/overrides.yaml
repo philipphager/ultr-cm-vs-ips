@@ -1,0 +1,7 @@
+- data=istella
+- experiment.name=position_bias_strength
+- +experiment=ips_pointwise_unbiased
+- simulation.n_sessions=100000000
+- simulation.aggregate_clicks=True
+- simulation.simulator.user_model.position_bias=1.5
+- random_state=4

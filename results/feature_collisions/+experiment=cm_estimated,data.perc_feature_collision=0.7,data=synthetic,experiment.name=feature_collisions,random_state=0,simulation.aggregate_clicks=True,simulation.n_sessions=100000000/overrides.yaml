@@ -1,0 +1,7 @@
+- data=synthetic
+- experiment.name=feature_collisions
+- +experiment=cm_estimated
+- data.perc_feature_collision=0.7
+- simulation.n_sessions=100000000
+- simulation.aggregate_clicks=True
+- random_state=0

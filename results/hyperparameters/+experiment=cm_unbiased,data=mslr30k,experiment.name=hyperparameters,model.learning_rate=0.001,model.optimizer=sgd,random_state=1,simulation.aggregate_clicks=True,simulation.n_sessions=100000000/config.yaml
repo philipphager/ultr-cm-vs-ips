@@ -1,0 +1,79 @@
+experiment:
+  name: hyperparameters
+random_state: 1
+trainer:
+  _target_: pytorch_lightning.Trainer
+  max_epochs: 200
+  accelerator: auto
+  logger:
+  - _target_: src.logger.LocalLogger
+  callbacks:
+  - _target_: pytorch_lightning.callbacks.EarlyStopping
+    monitor: val_loss
+    patience: 5
+train_loader:
+  _target_: torch.utils.data.DataLoader
+  dataset: ???
+  batch_size: 50
+  shuffle: true
+val_test_loader:
+  _target_: torch.utils.data.DataLoader
+  dataset: ???
+  batch_size: 500
+  shuffle: false
+data:
+  _target_: src.data.MSLR30K
+  name: MSLR-Web30K
+  fold: 1
+  n_features: 136
+  pipeline:
+    _target_: src.data.preprocessing.Pipeline
+    normalize:
+    - _target_: src.data.preprocessing.Log1pNormalize
+    truncate:
+    - _target_: src.data.preprocessing.StratifiedTruncate
+      max_length: ${data.n_results}
+      random_state: ${random_state}
+    filter: []
+  n_results: 201
+baseline:
+  _target_: src.baseline.LightGBMRanker
+  name: LightGBM
+  objective: lambdarank
+  boosting_type: gbdt
+  metric: ndcg
+  n_estimators: 100
+  n_leaves: 31
+  learning_rate: 0.1
+  early_stopping_patience: 10
+  random_state: ${random_state}
+simulation:
+  simulator:
+    _target_: src.simulation.Simulator
+    baseline_model: ???
+    user_model:
+      _target_: src.simulation.GradedPBM
+      position_bias: 1.0
+      noise: 0.1
+  n_sessions: 100000000
+  aggregate_clicks: true
+model:
+  _target_: src.model.NeuralPBM
+  name: Neural PBM - Unbiased
+  layers:
+  - 512
+  - 256
+  - 128
+  dropouts:
+  - 0
+  - 0.1
+  - 0.1
+  activation:
+    _target_: torch.nn.ELU
+  n_results: ${data.n_results}
+  n_features: ${data.n_features}
+  loss:
+    _target_: src.loss.BinaryCrossEntropy
+  optimizer: sgd
+  learning_rate: 0.001
+  position_bias: 1.0
