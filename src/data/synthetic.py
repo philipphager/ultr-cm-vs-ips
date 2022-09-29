@@ -1,3 +1,4 @@
+import hashlib
 from typing import List
 
 import torch
@@ -32,7 +33,14 @@ class Synthetic(DatasetLoader):
         q = torch.arange(n_queries)
         n = torch.full((n_queries,), self.n_results)
 
-        seed = abs(hash(split)) % (10**8)
+        key = f"{split}-{self.random_state}"
+        seed = (
+            int(
+                hashlib.sha256(key.encode("utf-8")).hexdigest(),
+                16,
+            )
+            % 10**8
+        )
         generator = torch.Generator()
         generator.manual_seed(seed)
 
