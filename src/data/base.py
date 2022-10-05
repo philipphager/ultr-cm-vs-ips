@@ -14,7 +14,7 @@ class DatasetLoader(ABC):
         self.n_features = n_features
         self.n_results = n_results
         self.pipeline = pipeline
-        self.base_dir = Path("/ivi/ilps/personal/sgupta/philipp-project/")
+        self.base_dir = Path("~/.ltr_datasets")
 
         assert fold in self.folds
 
