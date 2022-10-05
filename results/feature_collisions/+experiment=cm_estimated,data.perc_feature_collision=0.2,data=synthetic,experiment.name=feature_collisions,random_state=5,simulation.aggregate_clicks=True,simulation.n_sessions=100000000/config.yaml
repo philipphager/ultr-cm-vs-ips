@@ -35,6 +35,7 @@ data:
     filter: []
   n_results: 25
   perc_feature_collision: 0.2
+  random_state: ${random_state}
 baseline:
   _target_: src.baseline.LightGBMRanker
   name: LightGBM
@@ -59,14 +60,8 @@ simulation:
 model:
   _target_: src.model.NeuralPBM
   name: Neural PBM - Estimated bias
-  layers:
-  - 512
-  - 256
-  - 128
-  dropouts:
-  - 0
-  - 0.1
-  - 0.1
+  layers: []
+  dropouts: []
   activation:
     _target_: torch.nn.ELU
   n_results: ${data.n_results}
@@ -74,5 +69,5 @@ model:
   loss:
     _target_: src.loss.BinaryCrossEntropy
   optimizer: adam
-  learning_rate: 0.0005
+  learning_rate: 0.1
   position_bias: null
