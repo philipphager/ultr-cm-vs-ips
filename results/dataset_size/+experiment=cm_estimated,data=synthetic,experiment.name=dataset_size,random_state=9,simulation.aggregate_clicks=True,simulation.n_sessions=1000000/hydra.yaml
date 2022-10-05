@@ -1,8 +1,8 @@
 hydra:
   run:
-    dir: /ivi/ilps/personal/sgupta/philipp-project/ultr-cm-vs-ips/results/${experiment.name}
+    dir: results/${experiment.name}
   sweep:
-    dir: /ivi/ilps/personal/sgupta/philipp-project/ultr-cm-vs-ips/results/${experiment.name}
+    dir: results/${experiment.name}
     subdir: ${hydra.job.override_dirname}
   launcher:
     submitit_folder: ${hydra.sweep.dir}/.submitit/%j
@@ -29,7 +29,7 @@ hydra:
     signal_delay_s: 120
     max_num_timeout: 0
     additional_parameters: {}
-    array_parallelism: 2
+    array_parallelism: 5
     setup: null
   sweeper:
     _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
@@ -148,7 +148,7 @@ hydra:
     name: main
     chdir: true
     override_dirname: +experiment=cm_estimated,data=synthetic,experiment.name=dataset_size,random_state=9,simulation.aggregate_clicks=True,simulation.n_sessions=1000000
-    id: '287059_329'
+    id: '398772_329'
     num: 329
     config_name: config
     env_set: {}
@@ -161,18 +161,18 @@ hydra:
   runtime:
     version: 1.2.0
     version_base: '1.2'
-    cwd: /home/sgupta/philipp-project/ultr-cm-vs-ips
+    cwd: /home/phager/Developer/ultr-cm-vs-ips
     config_sources:
     - path: hydra.conf
       schema: pkg
       provider: hydra
-    - path: /home/sgupta/philipp-project/ultr-cm-vs-ips/config
+    - path: /home/phager/Developer/ultr-cm-vs-ips/config
       schema: file
       provider: main
     - path: ''
       schema: structured
       provider: schema
-    output_dir: /ivi/ilps/personal/sgupta/philipp-project/ultr-cm-vs-ips/results/dataset_size/+experiment=cm_estimated,data=synthetic,experiment.name=dataset_size,random_state=9,simulation.aggregate_clicks=True,simulation.n_sessions=1000000
+    output_dir: /home/phager/Developer/ultr-cm-vs-ips/results/dataset_size/+experiment=cm_estimated,data=synthetic,experiment.name=dataset_size,random_state=9,simulation.aggregate_clicks=True,simulation.n_sessions=1000000
     choices:
       experiment: cm_estimated
       model: cm_estimated
