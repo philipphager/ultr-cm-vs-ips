@@ -1,5 +1,5 @@
-# Are Neural Click Models Pointwise IPS Rankers?
-Source code for our paper `Are Neural Click Models Pointwise IPS Rankers?`.
+# Contrasting Neural Click Models and Pointwise IPS Rankers
+Source code for our paper `Contrasting Neural Click Models and Pointwise IPS Rankers`.
 
 ## Data
 The project automatically downloads public datasets to `~/.ltr-datasets/` on first execution.
